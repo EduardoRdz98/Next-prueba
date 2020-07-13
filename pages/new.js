@@ -56,11 +56,27 @@ const Newuser = () => {
 
   //Aquí se manejan los cambios en los inputs
   const handleChange = (e) => {
+    let name = e.target.name;
+    let value = e.target.value;
     // esto no lo entendí pero en esta parte del video se usa: https://www.youtube.com/watch?v=WSr0GcBF7Ag min33:53
-    setForm({
-      ...form,
-      [e.target.name]: e.target.value,
-    });
+    if (e.target.name == "password") {
+      bcrypt.hash(e.target.value, null, null, (err, hash) => {
+        if (err) {
+          console.log(err);
+        }
+        if (hash) {
+          setForm({
+            ...form,
+            [name]: hash,
+          });
+        }
+      });
+    } else {
+      setForm({
+        ...form,
+        [e.target.name]: e.target.value,
+      });
+    }
   };
 
   //Se validan los campos
