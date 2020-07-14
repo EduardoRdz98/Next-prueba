@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import fetch from "isomorphic-unfetch";
 import { Button, Form, Loader } from "semantic-ui-react";
 import { useRouter } from "next/router";
+import bcrypt from "bcrypt-node";
 
 //Función para crear nuevos usuarios
 const Newuser = () => {

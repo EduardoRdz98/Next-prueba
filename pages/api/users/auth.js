@@ -1,4 +1,5 @@
 import { MongoClient } from "mongodb";
+import bcrypt from "bcrypt-node";
 
 const assert = require("assert");
 //const bcrypt = require('bcrypt');
