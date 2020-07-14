@@ -53,7 +53,7 @@ function Index({ users }) {
       if(user.email == data.email){
         nombre = user.name;
       }
-    }
+    }console.log(data)
 
     return (
       <div className="notes-container">
@@ -88,9 +88,13 @@ function Index({ users }) {
                     <Link href={`/${user._id}`}>
                       <Button primary>Ver</Button>
                     </Link>
-                    <Link href={`/${user._id}/edit`}>
-                      <Button primary>Editar</Button>
-                    </Link>
+                    {data.email == user.email ? (
+                      <Link href={`/${user._id}/edit`}>
+                        <Button primary>Editar</Button>
+                      </Link>
+                    ) : (
+                      <a></a>
+                    )}
                   </Card.Content>
                 </Card>
               </div>

@@ -21,7 +21,6 @@ const Navbar = () => {
     isLogedIn = false;
     //revalidate será la variable que se use cuando se quiera cerrar la sesion
     revalidate();
-    
   };
 
   return (
