@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import fetch from "isomorphic-unfetch";
 import { Button, Form, Loader } from "semantic-ui-react";
 import { useRouter } from "next/router";
+import bcrypt from "bcrypt-node";
 
 //En esa función se edita un usuario
 const EditUser = ({ user }) => {
@@ -59,11 +60,27 @@ const EditUser = ({ user }) => {
 
   //Aqui se manejan los cambios en los inputs del formulario
   const handleChange = (e) => {
-    // sigo sin entender lo de los 3 puntos xd: https://www.youtube.com/watch?v=WSr0GcBF7Ag min33:53
-    setForm({
-      ...form,
-      [e.target.name]: e.target.value,
-    });
+    let name = e.target.name;
+    let value = e.target.value;
+    // esto no lo entendí pero en esta parte del video se usa: https://www.youtube.com/watch?v=WSr0GcBF7Ag min33:53
+    if (e.target.name == "password") {
+      bcrypt.hash(e.target.value, null, null, (err, hash) => {
+        if (err) {
+          console.log(err);
+        }
+        if (hash) {
+          setForm({
+            ...form,
+            [name]: hash,
+          });
+        }
+      });
+    } else {
+      setForm({
+        ...form,
+        [e.target.name]: e.target.value,
+      });
+    }
   };
 
   //Aquí se validan los datos del formulario
@@ -157,7 +174,6 @@ const EditUser = ({ user }) => {
               label="Contraseña"
               placeholder="Contraseña"
               name="password"
-              value={form.password}
               type="password"
               onChange={handleChange}
             />

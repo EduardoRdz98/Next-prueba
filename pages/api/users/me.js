@@ -1,11 +1,11 @@
 //La clase se encarga de buscar un token en las cookies para validar la sesion
-const jwt = require('jsonwebtoken');
-const jwtSecret = 'SUPERSECRETE20220';
+const jwt = require("jsonwebtoken");
+const jwtSecret = "SUPERSECRETE20220";
 
 export default (req, res) => {
-  if (req.method === 'GET') {
-    if (!('token' in req.cookies)) {
-      res.status(401).json({message: 'Imposible autorizar'});
+  if (req.method === "GET") {
+    if (!("token" in req.cookies)) {
+      res.status(401).json({ message: "Imposible autorizar" });
       return;
     }
     let decoded;
@@ -22,7 +22,7 @@ export default (req, res) => {
       res.json(decoded);
       return;
     } else {
-      res.status(401).json({message: 'Imposible autorizar'});
+      res.status(401).json({ message: "Imposible autorizar" });
     }
   }
 };

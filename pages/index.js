@@ -1,4 +1,4 @@
-import Head from "next/head";
+import Head from "next/Head";
 import Link from "next/link";
 import fetch from "isomorphic-unfetch";
 import { Button, Card } from "semantic-ui-react";
@@ -34,17 +34,31 @@ function Index({ users }) {
           />
         </Head>
         <h1>Sistema de Registro de Usuarios</h1>
-        <h2>No has iniciado sesión. Logeate.</h2>
-        <Link href="/login">Login</Link>
+        <h2>
+          Favor de{" "}
+          <Link as="/login" href="/login">
+            iniciar sesión
+          </Link>
+        </h2>
       </div>
     );
   }
 
   //Si hay sesion se muestran las tarjetas
   if (loggedIn == true) {
+    let nombre;
+    var user;
+
+    for(user of users){
+      if(user.email == data.email){
+        nombre = user.name;
+      }
+    }
+
     return (
       <div className="notes-container">
-        <p>Welcome {data.email}!</p>
+        <p>Bienvenido, {nombre}!
+        </p>
         <button
           onClick={() => {
             cookie.remove("token");
