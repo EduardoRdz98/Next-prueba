@@ -1,19 +1,20 @@
-import React, {useState} from 'react';
-import Router from 'next/router';
-import cookie from 'js-cookie';
+import React, { useState } from "react";
+import Router from "next/router";
+import cookie from "js-cookie";
+import { Button, Form, Loader } from "semantic-ui-react";
 
 const Login = () => {
-  const [loginError, setLoginError] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [loginError, setLoginError] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   function handleSubmit(e) {
     e.preventDefault();
     //call api
-    fetch('/api/users/auth', {
-      method: 'POST',
+    fetch("/api/users/auth", {
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({
         email,
@@ -29,29 +30,35 @@ const Login = () => {
         }
         if (data && data.token) {
           //set cookie
-          cookie.set('token', data.token, {expires: 2});
-          Router.push('/');
+          cookie.set("token", data.token, { expires: 2 });
+          Router.push("/");
         }
       });
   }
   return (
-    <form onSubmit={handleSubmit}>
-      <p>Login</p>
-      <input
-        name="email"
-        type="email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-      />
-      <input
-        name="password"
-        type="password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-      />
-      <input type="submit" value="Submit" />
-      {loginError && <p style={{color: 'red'}}>{loginError}</p>}
-    </form>
+    <div className="form-container">
+      <h1>Iniciar sesión</h1>
+      <Form onSubmit={handleSubmit}>
+        <Form.Input
+          label="Email"
+          placeholder="Email"
+          name="email"
+          type="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+        <Form.Input
+          label="Password"
+          placeholder="Password"
+          name="password"
+          type="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+        <Button type="submit">Iniciar sesión</Button>
+        {loginError && <p style={{ color: "red" }}>{loginError}</p>}
+      </Form>
+    </div>
   );
 };
 
