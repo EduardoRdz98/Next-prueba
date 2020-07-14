@@ -21,6 +21,16 @@ h1 {
   justify-content: space-between;
 }
 
+.navbar .login {
+  color: #fff;
+  font-size: 1.5rem;
+  margin-right: 15px;
+}
+
+.navbar-brand:hover .login:hover {
+  color: #fff;
+}
+
 .navbar .create {
   color: #fff;
   font-size: 1.5rem;
