@@ -86,43 +86,42 @@ function Index({ users }) {
       </div>
     );
   }
-}
 
-return (
-  <div className="notes-container">
-    <h1>Usuarios</h1>
-    <div className="grid wrapper">
-      {users.map((user) => {
-        return (
-          //Div que contiene las tarjetas que se mostraran con los nombres de los usuarios
-          <div key={user._id}>
-            <Card>
-              <Card.Content>
-                <Card.Header>
-                  <Link href={`/${user._id}`}>
-                    <a>
-                      {user.name} {user.surname}
-                    </a>
+  return (
+    <div className="notes-container">
+      <h1>Usuarios</h1>
+      <div className="grid wrapper">
+        {users.map((user) => {
+          return (
+            //Div que contiene las tarjetas que se mostraran con los nombres de los usuarios
+            <div key={user._id}>
+              <Card>
+                <Card.Content>
+                  <Card.Header>
+                    <Link href={`/${user._id}`}>
+                      <a>
+                        {user.name} {user.surname}
+                      </a>
+                    </Link>
+                  </Card.Header>
+                </Card.Content>
+                <Card.Content extra>
+                  <Link as={`/${user._id}`} href={`/${user._id}`}>
+                    <Button primary>Ver</Button>
                   </Link>
-                </Card.Header>
-              </Card.Content>
-              <Card.Content extra>
-                <Link as={`/${user._id}`} href={`/${user._id}`}>
-                  <Button primary>Ver</Button>
-                </Link>
-                <Link as={`/${user._id}/edit`} href={`/${user._id}/edit`}>
-                  <Button primary>Editar</Button>
-                </Link>
-              </Card.Content>
-            </Card>
-          </div>
-        );
-      })}
+                  <Link as={`/${user._id}/edit`} href={`/${user._id}/edit`}>
+                    <Button primary>Editar</Button>
+                  </Link>
+                </Card.Content>
+              </Card>
+            </div>
+          );
+        })}
+      </div>
     </div>
-  </div>
-);
-//}
-//};
+  );
+  //}
+}
 
 //Se hace la peticion para cargar los usuarios que existen en la colección de users
 Index.getInitialProps = async () => {
