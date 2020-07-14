@@ -59,14 +59,6 @@ function Index({ users }) {
       <div className="notes-container">
         <p>Bienvenido, {nombre}!
         </p>
-        <button
-          onClick={() => {
-            cookie.remove("token");
-            revalidate();
-          }}
-        >
-          Logout
-        </button>
         <h1>Usuarios</h1>
         <div className="grid wrapper">
           {users.map((user) => {
